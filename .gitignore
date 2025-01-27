@@ -1,0 +1,9 @@
+# For the User Service
+user-service/.env
+user-service/node_modules
+user-service/dist
+
+# For the Products Service
+product-service/.env
+product-service/node_modules
+product-service/dist

@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  user-service:
+    build:
+      context: ./user-service
+    ports:
+      - "3002:3002"
+    environment:
+      - MONGO_USER_SERVICE_URL=mongodb://localhost:27017/users
+      - PRODUCT_SERVER_URL=http://localhost:3001
+    depends_on:
+      - mongo
+
+  product-service:
+    build:
+      context: ./product-service
+    ports:
+      - "3001:3001"
+    environment:
+      - MONGO_URI=mongodb://localhost:27017/products
+      - USER_SERVICE_URL=http://localhost:3002
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
