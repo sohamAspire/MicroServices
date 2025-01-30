@@ -1,6 +1,6 @@
 import express from 'express';
-import genericRoutes from './routes/genericRouter';
-import genericController from './controllers/genericController';
+import genericRoutes from 'shared/dist/generic-router/generic.router';
+import genericController from 'shared/dist/generic-controller/generic.controller'
 import User from './models/user.model';
 import cors from 'cors'
 
@@ -26,11 +26,9 @@ const corsOptions = {
 // Apply CORS middleware
 app.use(cors(corsOptions));
 
-const API_VERSION = 'v1';
-
 const userController = genericController(User);
 
-app.use(`/api/${API_VERSION}/users`, genericRoutes(userController));
+app.use(`/users`, genericRoutes(userController));
 
 // Default Testing route.
 app.get('/', (req, res) => {

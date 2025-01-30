@@ -1,11 +1,9 @@
-import express from 'express';
-import { createProductWithNonRegisteredUser } from '../controllers/product.controller';
+import express , { IRouter } from 'express';
 
-const genericRoutes = (controller: Record<string, any>) => {
+const genericRoutes = (controller: any): IRouter => {
   const router = express.Router();
 
   router.post('/', controller.create);
-  router.post('/create' , createProductWithNonRegisteredUser)
   router.get('/', controller.findAll);
   router.get('/:id', controller.findOne);
   router.put('/:id', controller.update);

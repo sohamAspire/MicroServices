@@ -7,3 +7,7 @@ user-service/dist
 product-service/.env
 product-service/node_modules
 product-service/dist
+
+# For Shared lib
+shared-lib/node_modules
+shared-lib/dist
