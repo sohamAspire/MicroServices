@@ -1,6 +1,6 @@
 import express , { IRouter } from 'express';
 
-const genericRoutes = (controller: any): IRouter => {
+const genericRouter = (controller: any): IRouter => {
   const router = express.Router();
 
   router.post('/', controller.create);
@@ -12,4 +12,4 @@ const genericRoutes = (controller: any): IRouter => {
   return router;
 };
 
-export default genericRoutes;
+export default genericRouter;

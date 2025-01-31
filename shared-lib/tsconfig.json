@@ -5,17 +5,8 @@
     "declaration": true,
     "outDir": "./dist",
     "strict": true,
-    "esModuleInterop": true,
-    "baseUrl": ".",
-    "paths": {
-      "shared": ["node_modules/shared/dist"]
-    }
+    "esModuleInterop": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }
