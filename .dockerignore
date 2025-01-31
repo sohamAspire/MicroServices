@@ -1,0 +1,11 @@
+user-service/node_modules
+shared-lib/node_modules
+product-service/node_modules
+
+product-service/dist
+user-service/dist
+shared-lib/dist
+
+user-service/.env
+shared-lib/.env
+product-service/.env

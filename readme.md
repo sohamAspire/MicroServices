@@ -141,4 +141,7 @@ If you encounter issues with module resolution or imports, double-check the npm 
 Ensure that the version of the shared library you're linking to or installing is compatible with your services.
 For issues with NGINX, make sure the proxy pass URLs and ports are correct.
 
+For Docker Build for single services 
+use ``` sudo docker build -t <service-name> -f <service-name>/Dockerfile . ```
+
 For Redis configuration , install redis-server in local
