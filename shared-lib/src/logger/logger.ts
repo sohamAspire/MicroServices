@@ -24,11 +24,11 @@ const getTransports = () => {
     // for ELK logging
     if (isELKEnabled) {
         transports.push(new ElasticsearchTransport({
-            level: 'info', // Log level
+            level: 'info',
             clientOpts: {
-              node: URL,  // Elasticsearch URL
+              node: URL,
             },
-            indexPrefix: INDEX,  // Define index prefix
+            indexPrefix: INDEX,
           }))
     }
     
@@ -36,7 +36,6 @@ const getTransports = () => {
     if (!isELKEnabled) {
         transports.push(new winston.transports.File({
             filename: 'logs/app.log',
-            level: 'error',
             format: winston.format.combine(
                 winston.format.timestamp(),
                 winston.format.json()
@@ -48,7 +47,7 @@ const getTransports = () => {
 }
 
 // Create the logger instance
-const logger = winston.createLogger({
+const logger = () => winston.createLogger({
     level: 'info', 
     transports: getTransports()
 });

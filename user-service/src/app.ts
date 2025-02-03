@@ -1,6 +1,5 @@
 import express from 'express';
-import genericRoutes from 'shared/dist/generic-router/generic.router';
-import genericController from 'shared/dist/generic-controller/generic.controller'
+import { genericController, genericRouter } from 'shared';
 import User from './models/user.model';
 import cors from 'cors'
 
@@ -28,7 +27,7 @@ app.use(cors(corsOptions));
 
 const userController = genericController(User);
 
-app.use(`/users`, genericRoutes(userController));
+app.use(`/users`, genericRouter(userController));
 
 // Default Testing route.
 app.get('/', (req, res) => {

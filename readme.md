@@ -144,4 +144,34 @@ For issues with NGINX, make sure the proxy pass URLs and ports are correct.
 For Docker Build for single services 
 use ``` sudo docker build -t <service-name> -f <service-name>/Dockerfile . ```
 
-For Redis configuration , install redis-server in local
+To intialize and use logger 
+
+<code>
+    import { logger as IntializeLogger } from 'shared';
+
+    Intialize logger
+    const logger = IntializeLogger();
+
+    app.get('/test' , (req , res) => {
+        logger.info("You are good to go!")
+        res.status(200).json({ message : "You are good to go!"})
+    })
+</code>
+
+For Redis standalone configuration , install redis-server in docker
+
+<code>
+// This must be requried to use redisClient methods
+
+redisClient.initialize({ host: "localhost", port: 6379, db: 0, password: "aspire@3" })
+
+app.get('/test', async (req, res) => {
+    try {
+        await redisClient.setData("name" , "Soham")
+        res.status(200).json({ message: "You are good to go !" })
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+</code>
