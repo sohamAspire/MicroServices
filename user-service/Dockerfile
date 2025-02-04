@@ -7,15 +7,16 @@ COPY ./shared-lib /app/shared-lib
 
 # Install shared lib dependencies and create link
 WORKDIR /app/shared-lib
-RUN npm install && npm link
+RUN npm install && npm run build && npm link
 
 # Set up user service
 WORKDIR /app/user-service
-COPY ./user-service /app/
-RUN npm install
+COPY ./user-service /app/user-service
 
-# Link the shared library
-RUN npm link shared
+RUN npm install && npm link shared
+
+# To Generate build of user service
+RUN npm run build
 
 EXPOSE 3002
 

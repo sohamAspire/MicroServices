@@ -175,3 +175,7 @@ app.get('/test', async (req, res) => {
 })
 
 </code>
+
+
+For the <b>prometheus</b> and <b>grafana</b> there are 4 to 5 metrics are configured and for other metrics use shared-lib where prometheus file is configured. 
+

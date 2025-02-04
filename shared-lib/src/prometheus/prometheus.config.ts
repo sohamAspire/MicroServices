@@ -1,6 +1,7 @@
+import { NextFunction, Request, Response , Express } from 'express';
 import client from 'prom-client';
 
-const initializeMetrics =  (app: any) => {
+const initializeMetrics = (app: Express) => {
 
     // Default Registry
     const register = new client.Registry();
@@ -17,11 +18,6 @@ const initializeMetrics =  (app: any) => {
         help: 'Histogram of HTTP request durations in seconds',
         labelNames: ['method', 'route'],
         buckets: [0.1, 0.5, 1, 2.5, 5, 10],
-    });
-
-    const activeUsersGauge = new client.Gauge({
-        name: 'active_users',
-        help: 'Number of active users on the platform',
     });
 
     const memoryUsageGauge = new client.Gauge({
@@ -54,14 +50,22 @@ const initializeMetrics =  (app: any) => {
     register.registerMetric(memoryUsageGauge);
     register.registerMetric(httpRequestCounter);
     register.registerMetric(httpRequestDurationHistogram);
-    register.registerMetric(activeUsersGauge);
 
     app.get('/metrics', async (req: any, res: any) => {
         res.set('Content-Type', register.contentType);
         res.end(await register.metrics());
     });
 
-    console.log("App >>>>>>>>>>>>>>>>>>>>>>>" , app);
+    // Middleware to increment the counter
+    app.use((req : Request, res : Response, next : NextFunction) => {
+        const endTimer = httpRequestDurationHistogram.startTimer();
+        res.on('finish', () => {
+            httpRequestCounter.inc();
+            endTimer({ method: req.method, route: req.originalUrl });
+        });
+        next();
+    });
+
     console.log('--------------Metrics endpoint initialized at /metrics-----------------------------------------------------------');
 }
 

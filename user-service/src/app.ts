@@ -1,5 +1,5 @@
 import express from 'express';
-import { genericController, genericRouter } from 'shared';
+import { genericController, genericRouter, initializeMetrics } from 'shared';
 import User from './models/user.model';
 import cors from 'cors'
 
@@ -24,6 +24,8 @@ const corsOptions = {
 
 // Apply CORS middleware
 app.use(cors(corsOptions));
+
+initializeMetrics(app);
 
 const userController = genericController(User);
 
